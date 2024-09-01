@@ -1,0 +1,263 @@
+Public Class clsRectangle
+    ' Calculate the area of a floor in a room
+    1.1.2 Private _length As Decimal
+    Private _width As Decimal
+
+    1.1.3 Public Sub New()
+        ' Constructor with default values
+        _length = 0
+        _width = 0
+    End Sub
+
+    1.1.4 Property Length()
+        Get
+            Return _length
+        End Get
+        Set(ByVal value)
+            _length = value
+        End Set
+    End Property
+
+    Property Width()
+        Get
+            Return _width
+        End Get
+        Set(ByVal value)
+            _width = value
+        End Set
+    End Property
+
+    1.1.5 Public Function CalcArea() As Decimal
+        ' Calculate the area of the floor
+        Dim Area As Decimal
+        Area = _length * _width
+        Return Area
+    End Function
+End Class
+
+Public Class frmMain
+    ' Calculate how much it will cost to tile the floor in a room
+    1.2.2 Private myRectangle As clsRectangle
+
+    Private Sub btnCalculate_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCalculate.Click
+        ' Calculate the total cost of tiling the floor
+        Dim decTilePrice As Decimal = 0
+        Dim decTotalCost As Decimal = 0
+
+        ' Input
+        myRectangle.Length = CDec(txtLength.Text)
+        myRectangle.Width = CDec(txtWidth.Text)
+        decTilePrice = CDec(txtPrice.Text)
+
+        ' Processing
+        decTotalCost = myRectangle.CalcArea() * decTilePrice
+
+        ' Output
+        lblTotalCost.Text = decTotalCost.ToString("C2")
+    End Sub
+
+    1.2.4 Private Sub btnClear_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnClear.Click
+        ' Clear all the controls on the form
+        txtLength.Clear()
+        txtWidth.Clear()
+        txtPrice.Clear()
+        lblTotalCost.Text = ""
+        txtLength.Focus()
+    End Sub
+
+    1.2.5 Private Sub btnExit_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnExit.Click
+        ' Close the form and exit the application
+        Me.Close()
+    End Sub
+End Class
+—————————————-
+Public Class frmCapture
+    ' Examination Number
+
+    2.2 Private Sub frmCapture_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        GetLecturers()
+        txtName.Focus()
+    End Sub
+
+    Private Sub btnSubmit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSubmit.Click
+        btnSubmit.Enabled = False
+
+        Try
+            ' Declare the connection and command objects.
+            Dim connection As New OleDb.OleDbConnection
+            Dim command As New OleDb.OleDbCommand
+
+            ' Initialize the ConnectionString property of the connection and open the database connection.
+            connection.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\\Databases\CollegeSkyDB.mdb;User Id=;Password=;"
+            connection.Open()
+
+            ' Set the Connection and CommandText properties of the command object.
+            command.Connection = connection
+            command.CommandText = "INSERT INTO LecturerRecruit_Sky (Name, Surname, LecturerNumber, Department, Telephone) VALUES(@Name,@Surname,@LectureNumber,@Department,@Telephone)"
+
+            ' Declare and initialize the parameters.
+            2.3.5 Dim parName As New OleDb.OleDbParameter("@Name", txtName.Text)
+            Dim parSurname As New OleDb.OleDbParameter("@Surname", txtSurname.Text)
+            Dim parLecturerNumber As New OleDb.OleDbParameter("@LectureNumber", txtLecturerNumber.Text)
+            Dim parDepartment As New OleDb.OleDbParameter("@Department", txtDepartment.Text)
+            Dim parTelephone As New OleDb.OleDbParameter("@Telephone", txtTelephone.Text)
+
+            ' Add the parameters to the command object.
+            command.Parameters.Add(parName)
+            command.Parameters.Add(parSurname)
+            command.Parameters.Add(parLecturerNumber)
+            command.Parameters.Add(parDepartment)
+            command.Parameters.Add(parTelephone)
+
+            ' Execute the command.
+            command.ExecuteNonQuery()
+
+            ' Close the database connection.
+            connection.Close()
+
+            ' Fetch the new result set for the Lecturer table.
+            GetLecturers()
+        Catch ex As Exception
+            ' Prompt the user with the exception.
+            MessageBox.Show(ex.ToString())
+        End Try
+    End Sub
+
+    2.4 Private Sub btnClear_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClear.Click
+        txtName.Clear()
+        txtSurname.Clear()
+        txtLecturerNumber.Clear()
+        txtDepartment.Clear()
+        txtTelephone.Clear()
+        txtName.Focus()
+        btnSubmit.Enabled = True
+    End Sub
+
+    2.5 Private Sub btnExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExit.Click
+        Me.Close()
+    End Sub
+End Class
+
+3.1 <html>
+<head>
+    <title>Examination Number</title>
+</head>
+<body>
+    <h3>Briefly tell us about yourself</h3>
+    <form>
+        Region: <input type='text' size='15' maxlength='15' /><br />
+        Gender: <input type='text' size='15' maxlength='6' /><br /><br />
+
+        <b>Your field of study:</b> (1 - Electrical, 2 - Mechanical, 3 - Information Technology) <br />
+        <select name='field'>
+            <option value='1'>1</option>
+            <option value='2'>2</option>
+            <option value='3'>3</option>
+        </select><br /><br />
+
+        <b>Activities of interest:</b><br />
+        <input type='checkbox' checked/> Debate <br />
+        <input type='checkbox' /> Music and Drama <br />
+        <input type='checkbox' /> Soccer <br />
+        <input type='checkbox' /> Netball <br />
+        <input type='checkbox' /> Chess <br /><br />
+
+        <b>Are you experiencing any problems with your studies?</b><br />
+        <input type='radio' name='coping' value='yes' checked /> Yes <br />
+        <input type='radio' name='coping' value='no' /> No <br /><br />
+
+        <b>If your answer is YES to the above question, briefly elaborate:</b><br />
+        <textarea rows='5' cols='40'>Enter your comments here.</textarea><br /><br />
+
+        <input type='reset' value='Clear form' />
+    </form>
+</body>
+</html>
+
+4.1 <html>
+<head>
+    <title>About Us</title>
+</head>
+<body>
+    <h2>About Us</h2>
+    <img src='Handshake.jpg' width='180' height='180' />
+    <hr />
+    <h3>Vision</h3>
+    <p>To be the best College in Southern Africa</p>
+    <hr />
+    <h3>Mission</h3>
+    <p>We educate the learner</p>
+    <ul>
+        <li>Mentally</li>
+        <li>Physically</li>
+        <li>Spiritually</li>
+    </ul>
+</body>
+</html>
+
+4.2 <html>
+<head>
+    <title>Enquiries</title>
+</head>
+<body>
+    <h4><b>Enquire about Department:</b></h4>
+    <table border='3'>
+        <tr>
+            <th>Head of Department</th>
+            <th>Name of Department</th>
+            <th>Telephone</th>
+        </tr>
+        <tr>
+            <td>Mr Photo</td>
+            <td>Information Technology</td>
+            <td>(012)386 6112</td>
+        </tr>
+        <tr>
+            <td>Mr Tau</td>
+            <td>Mechanical Engineering</td>
+            <td>(012)386 6113</td>
+        </tr>
+        <tr>
+            <td>Mr Arendse</td>
+            <td>Mechatronics</td>
+            <td>(012)386 6114</td>
+        </tr>
+        <tr>
+            <td>Mrs Shibambo</td>
+            <td>Life Sciences</td>
+            <td>(012)386 6115</td>
+        </tr>
+        <tr>
+            <td>Mr Mthambo</td>
+            <td>Electrical Engineering</td>
+            <td>(012)386 6116</td>
+        </tr>
+    </table>
+</body>
+</html>
+
+4.3 <html>
+<head>
+    <title>Navigate</title>
+</head>
+<body>
+    <h2>Navigate</h2>
+    <a href='aboutCollege.html' target='main'>About Us</a><br />
+    <a href='enquire.html' target='main'>Department</a>
+</body>
+</html>
+
+4.4 <html>
+<head>
+    <title>Linking Frames and HTML</title>
+</head>
+<frameset cols='150,*'>
+    <frame src='navigate.html' name='navigation' />
+    <frame src='aboutCollege.html' name='main' />
+</frameset>
+<noframes>
+    <body>
+    </body>
+    Your browser does not support Frames.
+</noframes>
+</html>
