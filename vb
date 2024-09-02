@@ -524,3 +524,81 @@ End Class
         End Try
     End Sub
 End Class
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>8303245067084</title> <!-- (Question 4.1.1) -->
+    <link rel="stylesheet" type="text/css" href="stylesheet6.css"> <!-- (Question 4.1.7) -->
+</head>
+<body bgcolor="Gold"> <!-- (Question 4.1.2) -->
+
+    <table>
+        <tbody bgcolor="Green" align="left"> <!-- (Question 4.1.3) -->
+            <tr>
+                <td width="8%">
+                    <font color="White"><h2>FIFA 2010 WORLD CUP IN SOUTH AFRICA</h2></font>
+                    <img src='C:\Users\thobza\Documents\wc2010logo.png' width='100' height='50' align="CENTER">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h1 align="center">WELCOME TO BAFANA BAFANA'S HOME</h1>
+    <h5 align="center">
+    <div id="menu">
+        <ul>
+            <li><a href="Comments.htm">About Bafana Bafana</a></li> <!-- (Question 4.1.5) -->
+            <li><a href="#">Match fixtures</a></li>
+            <li><a href="#">Current News</a></li>
+            <li><a href="#">Bafana Players</a></li>
+            <li><a href="#">History of Bafana</a></li>
+        </ul>
+    </div>
+
+    <table align="center">
+        <tbody bgcolor="Green" align="center">
+            <tr>
+                <td width="300" height="100">
+                    <img src="C:\Documents and Settings\staffroom\My Documents\Our Couch.jpg" width="300" height="180"> <!-- (Question 4.1.8) -->
+                </td>
+                <td bgcolor="Gold" width="400" height="100" border="20">
+                    Johannesburg - SAFA are keeping the lid on who will succeed Bafana coach Carlos Alberto Parreira - even though the Brazilian has disclosed that the next man to lead the national team has already been decided.
+                    Parreira says that an announcement will be made soon and that "it is a very good appointment."
+                    Parreira bowed out of his $200,000-a-month job after Bafana's elimination from the 2010 Soccer World Cup in which they drew with Mexico 1-1, lost to eventual Group A table-toppers Uruguay 3-0, but rebounded to beat a woeful French side 2-1.
+                    According to the KickOff website, SAFA has always stated that the new Bafana Bafana coach will be a South African and that preference would be given to Parreira's long-standing assistant Pitso Mosimane who also occupied that position during the tenure of former Bafana coach Joel Santana.
+                </td>
+                <td>
+                    <img src="C:\Documents and Settings\staffroom\My Documents\Bafana Line-up Squad.jpg" width="300" height="180"> <!-- (Question 4.1.8) -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</h5>
+</body>
+</html>
+/* Question 2.1.6 */
+#menu ul {
+    list-style-type: none;
+}
+
+#menu li {
+    display: inline;
+}
+
+#menu ul li a {
+    float: center;
+    width: 150px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    background: green;
+    padding: 5px;
+    border-right: 1px solid #fff;
+}
+
+#menu ul li a:hover {
+    background-color: #cccc00;
+}
+
